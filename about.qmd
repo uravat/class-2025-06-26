@@ -2,4 +2,11 @@
 title: "About"
 ---
 
-About this site
+This website was created as part of a data visualization project focused on racial and economic disparities across New York City census tracts. Using public census data and tools from the R tidyverse ecosystem, the project visualizes the relationship between race, geography, and income at the neighborhood level.
+
+The goal is to present this data in an accessible and interactive format that encourages exploration and understanding of structural inequality across the city. The project includes both static and interactive plots, along with interpretive text that contextualizes the findings.
+
+All data processing and visualization were done in R using `ggplot2`, `dplyr`, and `plotly`, and the site was built using [Quarto](https://quarto.org).
+
+To learn more, explore the **Race and Income** page linked in the navigation bar.
+
