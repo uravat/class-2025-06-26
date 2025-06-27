@@ -5,5 +5,12 @@
     "title": "About",
     "section": "",
     "text": "About this site"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Race and Income",
+    "section": "",
+    "text": "The dataset for this article was sourced from this GitHub repository, which compiles census tract-level data for New York City, including information on median household income and the largest racial or ethnic group in each tract. Covering all five boroughs—Bronx, Brooklyn, Manhattan, Queens, and Staten Island—the dataset allows for an in-depth exploration of economic inequality across racial and geographic lines. Each row includes the census tract name, the dominant racial group in that tract, and its median income, providing a useful snapshot of how race and income intersect at the neighborhood level in NYC.\n\n\n\n\n\n\n\n\n\nThe plot above statically visualizes the distribution of median household income across New York City census tracts, categorized by the predominant racial or ethnic group within each tract. Each dot represents a tract, with its position on the y-axis showing the largest racial group and the x-axis indicating median income. Color intensity reflects income level, adding a second visual cue. The plot is faceted by borough, allowing for geographic comparisons. The visualization highlights stark income disparities—tracts where White and Asian groups are predominant tend to have higher median incomes, especially in Manhattan and parts of Brooklyn and Queens, while tracts with Black or Hispanic majorities often cluster at lower income levels.\n\n\n\n\n\n\nThe interactive version above of the same previous plot enhances user engagement by allowing hover-based exploration of specific census tracts. Users can see detailed tooltips showing the tract name, dominant racial group, and median income for each dot. This interactivity makes it easier to identify patterns and outliers—such as extremely high-income tracts or borough-specific trends—without overwhelming the viewer. The dynamic features help bring the data to life, offering a more accessible and granular understanding of how race and income intersect across New York City neighborhoods."
   }
 ]
