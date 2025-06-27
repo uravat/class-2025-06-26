@@ -1,0 +1,109 @@
+---
+title: "Race and Income"
+execute:
+ echo: false
+ message: false
+---
+
+```{r}
+#| execute: false
+#| message: false
+library(tidyverse)
+
+# Read the CSV from the raw GitHub link
+nyc_data <- read_csv("https://raw.githubusercontent.com/bootcamp-2025-06/nyc-census-tracts-to-fork/refs/heads/main/data/nyc_tracts.csv", show_col_types = FALSE)
+```
+
+```{r}
+# Clean and filter
+nyc_clean <- nyc_data %>%
+  filter(!is.na(med_income)) %>%
+  mutate(race = str_to_title(race))  # Capitalize race labels
+```
+
+
+
+```{r}
+#| message: false
+library(tidyverse)
+library(scales)  # for dollar formatting
+
+# Read the data
+nyc_data <- read_csv("https://raw.githubusercontent.com/bootcamp-2025-06/nyc-census-tracts-to-fork/refs/heads/main/data/nyc_tracts.csv")
+
+# Clean and prep
+nyc_clean <- nyc_data %>%
+  filter(!is.na(med_income)) %>%
+  mutate(
+    race = str_to_title(race),  # Capitalize race
+    borough = str_extract(tract, "(?<=; ).*?(?= County)")  # Extract borough name from tract
+  )
+
+# Plot
+ggplot(nyc_clean, aes(x = med_income, y = fct_rev(race), color = med_income)) +
+  geom_jitter(width = 0, height = 0.2, alpha = 0.7, size = 2) +
+  facet_wrap(~borough, ncol = 1, strip.position = "right") +
+  scale_x_continuous(labels = dollar_format()) +
+  scale_color_viridis_c(option = "plasma", end = 0.9) +
+  labs(
+    title = "Race and Income Across Census Tracts in New York City",
+    subtitle = "Each dot represents a census tract, colored by median household income",
+    x = "Median household income",
+    y = "Largest group in Census tract",
+    color = "Income"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    strip.text = element_text(face = "bold", size = 12),
+    plot.title = element_text(face = "bold", size = 16),
+    legend.position = "none"
+  )
+
+```
+
+
+```{r}
+#| message: false
+library(tidyverse)
+library(scales)
+library(plotly)
+
+# Read the data
+nyc_data <- read_csv("https://raw.githubusercontent.com/bootcamp-2025-06/nyc-census-tracts-to-fork/refs/heads/main/data/nyc_tracts.csv")
+
+# Clean and prep
+nyc_clean <- nyc_data %>%
+  filter(!is.na(med_income)) %>%
+  mutate(
+    race = str_to_title(race),
+    borough = str_extract(tract, "(?<=; ).*?(?= County)")
+  )
+
+# Static ggplot
+p <- ggplot(nyc_clean, aes(x = med_income, y = fct_rev(race), color = med_income,
+                           text = paste("Tract:", tract,
+                                        "<br>Race:", race,
+                                        "<br>Income:", dollar(med_income)))) +
+  geom_jitter(width = 0, height = 0.2, alpha = 0.7, size = 2) +
+  facet_wrap(~borough, ncol = 1, strip.position = "right") +
+  scale_x_continuous(labels = dollar_format()) +
+  scale_color_viridis_c(option = "plasma", end = 0.9) +
+  labs(
+    title = "Race and Income Across Census Tracts in New York City",
+    subtitle = "Each dot represents a census tract, colored by median household income",
+    x = "Median household income",
+    y = "Largest group in Census tract",
+    color = "Income"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    strip.text = element_text(face = "bold", size = 12),
+    plot.title = element_text(face = "bold", size = 16)
+  )
+
+# Convert to interactive plot
+ggplotly(p, tooltip = "text")
+
+
+
+```
