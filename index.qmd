@@ -5,20 +5,24 @@ execute:
  message: false
 ---
 
+
+The dataset for this article was sourced from [this GitHub repository](https://github.com/bootcamp-2025-06/nyc-census-tracts-to-fork), which compiles census tract-level data for New York City, including information on median household income and the largest racial or ethnic group in each tract. Covering all five boroughs—Bronx, Brooklyn, Manhattan, Queens, and Staten Island—the dataset allows for an in-depth exploration of economic inequality across racial and geographic lines. Each row includes the census tract name, the dominant racial group in that tract, and its median income, providing a useful snapshot of how race and income intersect at the neighborhood level in NYC.
+
+
 ```{r}
 #| execute: false
 #| message: false
-library(tidyverse)
+#library(tidyverse)
 
 # Read the CSV from the raw GitHub link
-nyc_data <- read_csv("https://raw.githubusercontent.com/bootcamp-2025-06/nyc-census-tracts-to-fork/refs/heads/main/data/nyc_tracts.csv", show_col_types = FALSE)
+#nyc_data <- read_csv("https://raw.githubusercontent.com/bootcamp-2025-06/nyc-census-tracts-to-fork/refs/heads/main/data/nyc_tracts.csv", show_col_types = FALSE)
 ```
 
 ```{r}
 # Clean and filter
-nyc_clean <- nyc_data %>%
-  filter(!is.na(med_income)) %>%
-  mutate(race = str_to_title(race))  # Capitalize race labels
+#nyc_clean <- nyc_data %>%
+ # filter(!is.na(med_income)) %>%
+  #mutate(race = str_to_title(race))  # Capitalize race labels
 ```
 
 
@@ -60,6 +64,10 @@ ggplot(nyc_clean, aes(x = med_income, y = fct_rev(race), color = med_income)) +
   )
 
 ```
+
+
+
+The plot above statically visualizes the distribution of median household income across New York City census tracts, categorized by the predominant racial or ethnic group within each tract. Each dot represents a tract, with its position on the y-axis showing the largest racial group and the x-axis indicating median income. Color intensity reflects income level, adding a second visual cue. The plot is faceted by borough, allowing for geographic comparisons. The visualization highlights stark income disparities—tracts where White and Asian groups are predominant tend to have higher median incomes, especially in Manhattan and parts of Brooklyn and Queens, while tracts with Black or Hispanic majorities often cluster at lower income levels.
 
 
 ```{r}
@@ -107,3 +115,7 @@ ggplotly(p, tooltip = "text")
 
 
 ```
+
+
+
+The interactive version above of the same previous plot enhances user engagement by allowing hover-based exploration of specific census tracts. Users can see detailed tooltips showing the tract name, dominant racial group, and median income for each dot. This interactivity makes it easier to identify patterns and outliers—such as extremely high-income tracts or borough-specific trends—without overwhelming the viewer. The dynamic features help bring the data to life, offering a more accessible and granular understanding of how race and income intersect across New York City neighborhoods.
